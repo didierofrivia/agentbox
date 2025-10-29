@@ -76,4 +76,13 @@ if [ -t 0 ] && [ -t 1 ]; then
     echo ""
 fi
 
+# Run GCloud Init
+export CLAUDE_CODE_USE_VERTEX=1
+export CLOUD_ML_REGION=us-east5
+export ANTHROPIC_VERTEX_PROJECT_ID=itpc-gcp-hybrid-pe-eng-claude
+gcloud init
+gcloud auth application-default login
+gcloud auth application-default set-quota-project cloudability-it-gemini
+
+# Execute the command passed to docker run
 exec "$@"
