@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         # Essential tools
-        ca-certificates curl wget gnupg lsb-release sudo \
+        ca-certificates curl wget gnupg lsb-release sudo apt-transport-https \
         # Development tools
         git vim nano tmux htop tree direnv \
         # Build tools
@@ -40,6 +40,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     # Setup locale
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen && \
+    # Install GCloud
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && \
+    apt-get update -y && apt-get install google-cloud-cli -y && \
     # Cleanup
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
