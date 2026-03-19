@@ -34,6 +34,22 @@ No configuration needed - just install either runtime.
 4. (Strongly recommended) add an alias for global access - e.g. alias `agentbox` to `~/code/agentbox/agentbox`.
 5. Run `agentbox` from your desired working directory (wherever you would normally start your agentic coding tool).
 
+Or copy & paste:
+
+```bash
+git clone https://github.com/fletchgqc/agentbox.git ~/agentbox
+
+# Add alias for global access (choose based on your shell)
+# For Bash:
+echo "alias agentbox='~/agentbox/agentbox'" >> ~/.bashrc && source ~/.bashrc
+
+# For Zsh:
+echo "alias agentbox='~/agentbox/agentbox'" >> ~/.zshrc && source ~/.zshrc
+
+# Now you can use agentbox from any directory
+agentbox --help
+```
+
 ## CLI Agent Support
 
 - claude code: built-in
