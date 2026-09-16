@@ -63,6 +63,18 @@ Start your coding agent in the agentbox directory and issue this (example) promp
 
 Then you can go to your project directory and run (e.g.) `agentbox --tool copilot`. Thanks to [Felix Medam](https://github.com/SputnikTea) for this very cool idea.
 
+## Local Models
+
+OpenCode can use models served on your LAN or host. Configure the provider's base URL in `~/.config/opencode` (mounted into the container) as usual.
+
+- **LAN-served models**: reach them directly by IP (e.g. `http://192.168.1.50:11434`); no extra configuration.
+- **Host-served models** (e.g. Ollama on `localhost`): the container's `localhost` is not the host's. Expose the host and point OpenCode at it:
+  ```bash
+  # ~/.agentbox/.env
+  AGENTBOX_EXTRA_HOSTS="host.docker.internal:host-gateway"
+  ```
+  Then set the provider base URL to `http://host.docker.internal:11434` (adjust the port). On Docker Desktop `host.docker.internal` resolves automatically, so the `AGENTBOX_EXTRA_HOSTS` entry is only needed on native Linux Docker.
+
 ## Docker Access
 
 When Docker Desktop is used, AgentBox can optionally mount its socket, allowing you to run Docker commands inside the container:
