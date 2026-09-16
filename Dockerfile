@@ -123,6 +123,11 @@ RUN bash -c "source $NVM_DIR/nvm.sh && \
         yarn \
         pnpm"
 
+# Install Rust toolchain via rustup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+    sh -s -- -y --profile minimal --component clippy rustfmt && \
+    echo 'source "$HOME/.cargo/env"' >> ~/.bashrc
+
 # Install SDKMAN for Java toolchain management
 RUN curl -s "https://get.sdkman.io?rcupdate=false" | bash && \
     echo 'source "$HOME/.sdkman/bin/sdkman-init.sh"' >> ~/.bashrc && \
@@ -146,7 +151,8 @@ RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/t
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && \
     echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc && \
-    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.zshrc
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.zshrc && \
+    echo 'source "$HOME/.cargo/env"' >> ~/.zshrc
 
 # Setup direnv hooks for automatic .envrc loading
 RUN echo 'eval "$(direnv hook bash)"' >> ~/.bashrc && \

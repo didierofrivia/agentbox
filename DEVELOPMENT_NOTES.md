@@ -83,6 +83,8 @@ $PROJECT_DIR            # Project directory (mounted at full host path)
 /home/agent/.cache/pip  # Pip cache
 /home/agent/.m2         # Maven cache
 /home/agent/.gradle     # Gradle cache
+/home/agent/.cargo/registry  # Cargo registry cache
+/home/agent/.cargo/git       # Cargo git cache
 /home/agent/.shell_history  # History directory (HISTFILE env var points to zsh_history inside)
 /home/agent/.claude     # Claude config
 /home/agent/.config/opencode  # OpenCode config
